@@ -39,7 +39,7 @@ display = adafruit_il0373.IL0373(
 g = displayio.Group()
 
 # Display a ruler graphic from the root directory of the CIRCUITPY drive
-f = open("/eInkQuoteBackground.bmp", "rb")
+f = open("FLLresources/images/eInkHomescreen.bmp", "rb")
 
 pic = displayio.OnDiskBitmap(f)
 # Create a Tilegrid with the bitmap and put in the displayio group
@@ -49,10 +49,19 @@ g.append(t)
 # Draw simple text using the built-in font into a displayio group
 # For smaller text, change scale=2 to scale=1
 text_group = displayio.Group(max_size=10, scale=2,
-                             x=50,
-                             y=20)
-quote = "Books! Best Weapons in the world!"
-text_area = label.Label(terminalio.FONT, text=quote, color=BLACK)
+                             x=DISPLAY_WIDTH - 200,
+                             y=DISPLAY_HEIGHT - 20)
+# Need to put in code that reads visit variable to visit_count
+visit_count = "1,234"
+text_area = label.Label(terminalio.FONT, text=visit_count, color=RED)
+text_group.append(text_area)
+g.append(text_group)
+
+text_group = displayio.Group(max_size=10, scale=1,
+                             x=DISPLAY_WIDTH - 135,
+                             y=DISPLAY_HEIGHT - 15)
+visit_text = "visits...and counting!"
+text_area = label.Label(terminalio.FONT, text=visit_text, color=BLACK)
 text_group.append(text_area)
 g.append(text_group)
 
