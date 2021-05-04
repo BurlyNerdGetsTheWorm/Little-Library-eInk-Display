@@ -107,6 +107,7 @@ while True:
         display.refresh()
         g.pop()
         g.pop()
+        g.pop()
 
 else:
         time.sleep(1)
