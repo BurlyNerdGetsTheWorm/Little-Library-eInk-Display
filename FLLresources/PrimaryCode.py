@@ -62,29 +62,35 @@ while True:
         # print("refreshed")
 
         visit_file = open("FLLresources/visit_count.txt", 'r+')
-    try:
         visit_count = int(visit_file.read())
         visit_count += 1
         visit_file.seek(0)
-        visit_file.write(visit_count)
-        visit_file.truncate()
-    finally:
+        visit_file.write(str(visit_count))
         visit_file.close()
-        time.sleep(120)
+        time.sleep(10)
         # Draw simple text using the built-in font into a displayio group
+
+        # Display homescreen image
+        f = open("FLLresources/images/eInkHomescreen.bmp", "rb")
+
+        pic = displayio.OnDiskBitmap(f)
+        # Create a Tilegrid with the bitmap and put in the displayio group
+        t = displayio.TileGrid(pic, pixel_shader=displayio.ColorConverter())
+        g.append(t)
+
         # For smaller text, change scale=2 to scale=1
         text_group = displayio.Group(max_size=10, scale=2,
                                      x=DISPLAY_WIDTH - 200,
                                      y=DISPLAY_HEIGHT - 20)
         # Need to put in code that reads visit variable to visit_count
-        visit_count = "1,234"
-        text_area = label.Label(terminalio.FONT, text=visit_count, color=RED)
+        visit_text = str(visit_count)
+        text_area = label.Label(terminalio.FONT, text=visit_text, color=RED)
         text_group.append(text_area)
         g.append(text_group)
 
         text_group = displayio.Group(max_size=10, scale=1,
-                             x=DISPLAY_WIDTH - 135,
-                             y=DISPLAY_HEIGHT - 15)
+                                     x=DISPLAY_WIDTH - 135,
+                                     y=DISPLAY_HEIGHT - 15)
         visit_text = "visits...and counting!"
         text_area = label.Label(terminalio.FONT, text=visit_text, color=BLACK)
         text_group.append(text_area)
@@ -96,32 +102,6 @@ while True:
         # NOTE: Do not refresh eInk displays sooner than 180 seconds
         display.refresh()
 
-        # NOTE: Do not refresh eInk displays sooner than 180 seconds
-        display.refresh()
-
-        time.sleep(120)
+        time.sleep(10)
 else:
-        print("Still Welcome! Do Nothing")
-        print("...")
         time.sleep(1)
-
-text_area = label.Label(terminalio.FONT, text=visit_count, color=RED)
-text_group.append(text_area)
-g.append(text_group)
-
-text_group = displayio.Group(max_size=10, scale=1,
-                             x=DISPLAY_WIDTH - 135,
-                             y=DISPLAY_HEIGHT - 15)
-visit_text = "visits...and counting!"
-text_area = label.Label(terminalio.FONT, text=visit_text, color=BLACK)
-text_group.append(text_area)
-g.append(text_group)
-
-# Place the display group on the screen
-display.show(g)
-
-# NOTE: Do not refresh eInk displays sooner than 180 seconds
-display.refresh()
-# print("refreshed")
-
-# time.sleep(180)

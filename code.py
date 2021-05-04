@@ -102,9 +102,6 @@ while True:
         # NOTE: Do not refresh eInk displays sooner than 180 seconds
         display.refresh()
 
-        # NOTE: Do not refresh eInk displays sooner than 180 seconds
-        display.refresh()
-
         time.sleep(10)
 else:
         time.sleep(1)
