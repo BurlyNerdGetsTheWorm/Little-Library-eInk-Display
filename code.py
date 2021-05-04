@@ -18,6 +18,7 @@ epd_dc = board.D10
 epd_reset = board.D5
 epd_busy = board.D6
 
+
 # Create the displayio connection to the display pins
 display_bus = displayio.FourWire(
     spi, command=epd_dc, chip_select=epd_cs, reset=epd_reset, baudrate=1000000)
@@ -54,12 +55,13 @@ while True:
         t = displayio.TileGrid(pic, pixel_shader=displayio.ColorConverter())
         g.append(t)
 
+        time.sleep(display.time_to_refresh)
+
         # Place the display group on the screen
         display.show(g)
 
         # NOTE: Do not refresh eInk displays sooner than 180 seconds
         display.refresh()
-        # print("refreshed")
 
         visit_file = open("FLLresources/visit_count.txt", 'r+')
         visit_count = int(visit_file.read())
@@ -67,9 +69,9 @@ while True:
         visit_file.seek(0)
         visit_file.write(str(visit_count))
         visit_file.close()
-        time.sleep(10)
+        time.sleep(30)
         # Draw simple text using the built-in font into a displayio group
-
+        g.pop()
         # Display homescreen image
         f = open("FLLresources/images/eInkHomescreen.bmp", "rb")
 
@@ -80,7 +82,7 @@ while True:
 
         # For smaller text, change scale=2 to scale=1
         text_group = displayio.Group(max_size=10, scale=2,
-                                     x=DISPLAY_WIDTH - 200,
+                                     x=DISPLAY_WIDTH - 175,
                                      y=DISPLAY_HEIGHT - 20)
         # Need to put in code that reads visit variable to visit_count
         visit_text = str(visit_count)
@@ -99,9 +101,11 @@ while True:
         # Place the display group on the screen
         display.show(g)
 
+        time.sleep(display.time_to_refresh)
+
         # NOTE: Do not refresh eInk displays sooner than 180 seconds
         display.refresh()
+        g.pop()
 
-        time.sleep(10)
 else:
         time.sleep(1)
