@@ -106,6 +106,7 @@ while True:
         # NOTE: Do not refresh eInk displays sooner than 180 seconds
         display.refresh()
         g.pop()
+        g.pop()
 
 else:
         time.sleep(1)
