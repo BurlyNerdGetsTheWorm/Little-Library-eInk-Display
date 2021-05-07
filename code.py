@@ -1,3 +1,4 @@
+from digitalio import DigitalInOut, Direction, Pull
 import time
 import board
 import displayio
@@ -5,6 +6,11 @@ import adafruit_il0373
 import terminalio
 from adafruit_display_text import label
 import random
+
+# button
+door_button = DigitalInOut(board.A1)
+door_button.direction = Direction.INPUT
+door_button.pull = Pull.UP
 
 BLACK = 0x000000
 WHITE = 0xFFFFFF
@@ -41,8 +47,7 @@ display = adafruit_il0373.IL0373(
 g = displayio.Group()
 
 while True:
-    # if door_switch.value:
-    if True:
+    if not door_button.value:
         # select a random number to select a random quote
         # (adjust second number to the number of quotation images)
         quote_number = random.randint(1, 5)
@@ -110,4 +115,4 @@ while True:
         g.pop()
 
 else:
-        time.sleep(1)
+        time.sleep(2)
