@@ -50,7 +50,7 @@ while True:
     if not door_button.value:
         # select a random number to select a random quote
         # (adjust second number to the number of quotation images)
-        quote_number = random.randint(1, 5)
+        quote_number = random.randint(1, 35)
 
         # Display a graphic from the root directory of the CIRCUITPY drive
         f = open(f"FLLresources/images/quote{quote_number}.bmp", "rb")
