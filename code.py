@@ -87,7 +87,7 @@ while True:
 
         # For smaller text, change scale=2 to scale=1
         text_group = displayio.Group(max_size=10, scale=2,
-                                     x=DISPLAY_WIDTH - 175,
+                                     x=DISPLAY_WIDTH - 195,
                                      y=DISPLAY_HEIGHT - 20)
         # Need to put in code that reads visit variable to visit_count
         visit_text = str(visit_count)
@@ -96,7 +96,7 @@ while True:
         g.append(text_group)
 
         text_group = displayio.Group(max_size=10, scale=1,
-                                     x=DISPLAY_WIDTH - 125,
+                                     x=DISPLAY_WIDTH - 145,
                                      y=DISPLAY_HEIGHT - 15)
         visit_text = "visits...and counting!"
         text_area = label.Label(terminalio.FONT, text=visit_text, color=BLACK)
