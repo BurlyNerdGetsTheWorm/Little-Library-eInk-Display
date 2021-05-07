@@ -8,7 +8,7 @@ from adafruit_display_text import label
 import random
 
 # button
-door_button = DigitalInOut(board.A1)
+door_button = DigitalInOut(board.A4)
 door_button.direction = Direction.INPUT
 door_button.pull = Pull.UP
 
@@ -96,7 +96,7 @@ while True:
         g.append(text_group)
 
         text_group = displayio.Group(max_size=10, scale=1,
-                                     x=DISPLAY_WIDTH - 135,
+                                     x=DISPLAY_WIDTH - 125,
                                      y=DISPLAY_HEIGHT - 15)
         visit_text = "visits...and counting!"
         text_area = label.Label(terminalio.FONT, text=visit_text, color=BLACK)
