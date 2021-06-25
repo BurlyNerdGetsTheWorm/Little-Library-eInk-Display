@@ -24,7 +24,6 @@ epd_dc = board.D10
 epd_reset = board.D5
 epd_busy = board.D6
 
-
 # Create the displayio connection to the display pins
 display_bus = displayio.FourWire(
     spi, command=epd_dc, chip_select=epd_cs, reset=epd_reset, baudrate=1000000)
@@ -45,9 +44,11 @@ display = adafruit_il0373.IL0373(
 
 # Create a display group for our screen objects
 g = displayio.Group()
-
+print("Before While Statement")
 while True:
-    if not door_button.value:
+    print("While Statement Started")
+#    if not door_button.value:  (Put back when switch is hooked up)
+    if door_button.value:
         # select a random number to select a random quote
         # (adjust second number to the number of quotation images)
         quote_number = random.randint(1, 35)
@@ -60,7 +61,9 @@ while True:
         t = displayio.TileGrid(pic, pixel_shader=displayio.ColorConverter())
         g.append(t)
 
-        time.sleep(display.time_to_refresh)
+        #time.sleep(display.time_to_refresh)
+        time.sleep(200)
+        print("Wake up! Time to display the quote")
 
         # Place the display group on the screen
         display.show(g)
@@ -106,13 +109,13 @@ while True:
         # Place the display group on the screen
         display.show(g)
 
-        time.sleep(display.time_to_refresh)
-
         # NOTE: Do not refresh eInk displays sooner than 180 seconds
+        #time.sleep(display.time_to_refresh)
+        time.sleep(200)
+        print("Wake up! It's time to show the visits!")
         display.refresh()
         g.pop()
         g.pop()
         g.pop()
-
-else:
+    else:
         time.sleep(2)
