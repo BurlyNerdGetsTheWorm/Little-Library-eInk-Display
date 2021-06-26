@@ -7,6 +7,8 @@ import terminalio
 from adafruit_display_text import label
 import random
 
+print("Imports Done! Let's get started")
+
 # button
 door_button = DigitalInOut(board.A4)
 door_button.direction = Direction.INPUT
@@ -44,11 +46,12 @@ display = adafruit_il0373.IL0373(
 
 # Create a display group for our screen objects
 g = displayio.Group()
-print("Before While Statement")
+print("Please wait during startup safety buffer")
+time.sleep(200)
 while True:
     print("While Statement Started")
-#    if not door_button.value:  (Put back when switch is hooked up)
-    if door_button.value:
+    if not door_button.value:
+        print("Door is open")
         # select a random number to select a random quote
         # (adjust second number to the number of quotation images)
         quote_number = random.randint(1, 35)
@@ -61,8 +64,8 @@ while True:
         t = displayio.TileGrid(pic, pixel_shader=displayio.ColorConverter())
         g.append(t)
 
-        #time.sleep(display.time_to_refresh)
-        time.sleep(200)
+        # time.sleep(display.time_to_refresh)
+        # time.sleep(200)
         print("Wake up! Time to display the quote")
 
         # Place the display group on the screen
@@ -70,14 +73,14 @@ while True:
 
         # NOTE: Do not refresh eInk displays sooner than 180 seconds
         display.refresh()
-
+        print("Time to update the visit count and then nap")
         visit_file = open("FLLresources/visit_count.txt", 'r+')
         visit_count = int(visit_file.read())
         visit_count += 1
         visit_file.seek(0)
         visit_file.write(str(visit_count))
         visit_file.close()
-        time.sleep(30)
+        time.sleep(200)
         # Draw simple text using the built-in font into a displayio group
         g.pop()
         # Display homescreen image
@@ -110,12 +113,13 @@ while True:
         display.show(g)
 
         # NOTE: Do not refresh eInk displays sooner than 180 seconds
-        #time.sleep(display.time_to_refresh)
-        time.sleep(200)
+        # time.sleep(display.time_to_refresh)
         print("Wake up! It's time to show the visits!")
         display.refresh()
         g.pop()
         g.pop()
         g.pop()
+        time.sleep(200)
     else:
         time.sleep(2)
+        print("Door is closed")
